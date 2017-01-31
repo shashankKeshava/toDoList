@@ -1,26 +1,26 @@
 import { combineReducers } from 'redux';
-import { ADD_TODO, TOGGLE_TODO, SET_VISIBILITY_FILTER, VisibityFilter } from '../actionType';
+import { ADD_TODO, TOGGLE_TODO, SET_VISIBILITY_FILTER, VisibityFilter } from '../actions';
 const { SHOW_ALL } = VisibityFilter;
 
-function visibityFilter(state = SHOW_ALL, actionType) {
-    switch (actionType.type) {
+function visibityFilter(state = SHOW_ALL, actions) {
+    switch (actions.type) {
         case SET_VISIBILITY_FILTER:
-            return actionType.filter
+            return actions.filter
         default:
             return state
     }
 }
 
-function toDoS(state = [], actionType) {
-    switch (actionType.type) {
+function toDoS(state = [], actions) {
+    switch (actions.type) {
         case ADD_TODO:
             return [...state, {
-                text: actionType.text,
+                text: actions.text,
                 completed: false
             }]
         case TOGGLE_TODO:
             return state.map((toDoS, index) => {
-                if (index == actionType.index) {
+                if (index == actions.index) {
                     return Object.assign({}, todo, { completed: !todo.completed })
                 }
                 return todo;
